@@ -14,6 +14,7 @@ This repo deploys a secure, self-hosted development stack using:
 
 
 This is the directory structure.
+bash ```
 ├── Readme.md
 ├── authelia
 │   ├── configuration.yml
@@ -28,7 +29,7 @@ This is the directory structure.
     │   ├── local.key
     │   └── san.ext
     └── nginx.conf
-
+```
 ### Terraform
 - this has terraform cod eto create a ec2 and run the setup.sh.
 - setup.sh will clone the repo with the config to run this. So make sure your code is pushed in some repo.
