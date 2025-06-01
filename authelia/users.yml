@@ -1,0 +1,7 @@
+users:
+  admin:
+    password: "$argon2id$v=19$m=65536,t=3,p=4$wUdwf3oPj5veeI+xmszBBQ$YGSX4lmawCxXWUNdJ+lCm6cUtEPrggiS/aIARWSsU2E" # replace with hashed
+    displayname: "Administrator"
+    email: admin@example.com
+    groups:
+      - admins

@@ -1,0 +1,69 @@
+(gatekeeper) {
+  route {
+    @auth_request {
+      path /*
+    }
+
+    reverse_proxy @auth_request http://authelia:9091 {
+      header_up X-Original-URL {scheme}://{host}{uri}
+      header_up X-Real-IP {remote_host}
+      header_up Content-Length ""
+    }
+
+    @unauthorized expression `{http.reverse_proxy.status} == 401`
+    handle @unauthorized {
+      redir https://auth.localdomain.com
+    }
+  }
+}
+
+gitea.localdomain.com {
+  import gatekeeper
+  reverse_proxy http://gitea:3000
+}
+
+grafana.localdomain.com {
+  import gatekeeper
+  reverse_proxy http://grafana:3000
+}
+
+auth.localdomain.com {
+  reverse_proxy http://authelia:9091
+}
+
+
+
+
+
+
+
+# {
+#   local_certs
+#   auto_https disable_redirects
+# }
+
+# gitea.localdomain.com {
+#   forward_auth http://authelia:9091 {
+#     uri /api/verify
+#     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+#     header_up X-Original-URL {http.request.uri}
+#   }
+
+#   reverse_proxy http://gitea:3000
+# }
+
+# grafana.localdomain.com {
+#   forward_auth http://authelia:9091 {
+#     uri /api/verify
+#     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+#     header_up X-Original-URL {http.request.uri}
+#   }
+
+#   reverse_proxy http://grafana:3000
+# }
+
+# auth.localdomain.com {
+#   reverse_proxy http://authelia:9091
+# }
+
+
