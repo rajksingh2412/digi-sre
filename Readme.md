@@ -1,5 +1,5 @@
 ### Prerequisites
-- Terraform isntalled.
+- Terraform installed.
 - AWS cli access
 
 This repo deploys a secure, self-hosted development stack using:
@@ -12,9 +12,9 @@ This repo deploys a secure, self-hosted development stack using:
 - **Terraform** (to provision EC2)
 - **S3 backend for Terraform state**
 
-
+```bash
 This is the directory structure.
-bash ```
+
 ├── Readme.md
 ├── authelia
 │   ├── configuration.yml
